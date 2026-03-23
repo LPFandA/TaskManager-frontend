@@ -38,7 +38,7 @@ const TaskForm = ({ onAddTask }: TaskFormProps) => {
             onSubmit={handleSubmit}
             className="p-6 mb-6 border rounded-lg bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-700 text-black dark:text-white"
         >
-            <h2 className="text-xl font-bold mb-4">Creaaaate Task</h2>
+            <h2 className="text-xl font-bold mb-4">Create Task</h2>
 
             <input
                 placeholder="Title"

@@ -1,13 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import TestPage from "./pages/TestPage";
-import "./index.css";
+import App from "./App";
 import { ThemeProvider } from "./context/ThemeContext";
+import "./index.css";
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
+ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <ThemeProvider>
-      <TestPage />
+      <App />
     </ThemeProvider>
   </React.StrictMode>
 );

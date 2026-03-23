@@ -4,25 +4,24 @@ import TaskCard from "../components/TaskCard";
 import TaskForm from "../components/TaskForm";
 import ThemeToggle from "../components/ThemeToggle";
 import type { Task } from "../features/tasks/types";
+import api from "../app/api";
 
-const API_BASE = "http://localhost:8000/api/tasks/";
+
 
 const TestPage = () => {
     const [tasks, setTasks] = useState<Task[]>([]);
     const [loading, setLoading] = useState(true);
 
-    // 1️⃣ Fetch tasks on mount
     useEffect(() => {
-        axios
-            .get<Task[]>(API_BASE)
+        api
+            .get<Task[]>("/tasks")
             .then((res) => setTasks(res.data))
             .finally(() => setLoading(false));
     }, []);
 
-    // 2️⃣ Add task to API
     const addTask = (newTask: Omit<Task, "id">) => {
-        axios
-            .post<Task>(API_BASE, newTask)
+        api
+            .post<Task>("/tasks", newTask)
             .then((res) => setTasks([...tasks, res.data]))
             .catch((err) => console.error(err));
     };
@@ -30,7 +29,7 @@ const TestPage = () => {
 
     const deleteTask = (taskId: number) => {
         axios
-            .delete(`${API_BASE}${taskId}/`)
+            .delete(`${"/tasks"}${taskId}/`)
             .then(() => {
                 // remove task locally
                 setTasks((prev) => prev.filter((task) => task.id !== taskId));
@@ -46,7 +45,9 @@ const TestPage = () => {
             </div>
 
             {/* Task Form */}
-            <TaskForm onAddTask={(task) => addTask(task)} />
+            <div className="w-full max-w-4xl mx-auto">
+                <TaskForm onAddTask={(task) => addTask(task)} />
+            </div>
 
             {/* Task List */}
             <div className="w-full max-w-lg mt-6 flex flex-col mx-auto">
